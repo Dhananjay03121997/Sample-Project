@@ -32,7 +32,7 @@ const schema = new mongoose.Schema({
         trim:true,
         required:[true, messages.require.replace('{{name}}', 'Mobile number')],
         validate(value){
-            if (!validator.isNumeric(value) || !validator.isLength(value,{min:10, max:13})) {
+            if (!validator.isNumeric(value) || !validator.isLength(value,{min:10, max:10})) {
                 throw new Error(messages.notValid.replace('{{name}}', 'Mobile number'))
             }
         }
@@ -40,6 +40,10 @@ const schema = new mongoose.Schema({
     password:{
         type: String,
         required:[true, messages.require.replace('{{name}}', 'password')]
+    },
+    is_delete:{
+        type: Boolean,
+        default: false
     }
 });
 
@@ -47,6 +51,9 @@ schema.pre('save', async function(next){
     const newTenant = this;
     if (newTenant.isModified('password')) {
             newTenant.password = await bcrypt.hash(newTenant.password, 10);
+    }
+    if (newTenant.isModified('mobile_no')) {
+        newTenant.mobile_no =`+91${newTenant.mobile_no}`;
     }
     next();
 });
