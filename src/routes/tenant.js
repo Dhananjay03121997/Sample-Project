@@ -41,7 +41,9 @@ router.post(`${url.add.replace('{{name}}', 'tenant')}`, async (req, res) => {
 
 router.get(`${url.get.replace('{{name}}', 'tenant')}`, async (req, res) => {
     try {
+        console.log("error");
         const newTenant = await tenant.find({"is_delete": false}).select({ "first_name": 1, "last_name": 1, "email": 1, "mobile_no": 1 });
+        console.log(newTenant);
         if (newTenant.length === 0) {
             return res.status(200).send({message:notFound.replace('{{name}}', 'Tenant')});
         }

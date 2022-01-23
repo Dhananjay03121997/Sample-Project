@@ -5,7 +5,6 @@ const image = require('./routes/image');
 
 require('dotenv').config();
 require('./db/db');
-const PORT = process.env.PORT;
 
 app.use(express.json());
 app.use(tenant);
@@ -13,7 +12,7 @@ app.use(image);
 
 app.get('/', (req,res)=>{
     console.log('connection');
-    res.send(`New App Started ON: ${PORT}`);
+    res.send(`New App Started ON:3000`);
 });
 
 module.exports = app;
