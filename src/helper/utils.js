@@ -1,5 +1,6 @@
 const { alreadyExists } = require('./messages');
 const tenant = require('../model/tenant');
+const path = require('path');
 
 
 module.exports= {contactExists: async function(mobile = "", email = ""){
@@ -18,4 +19,22 @@ try {
 } catch (error) {
     return error.message;
 }
-}}
+},
+getImageUrl:(async (image)=>{
+    try {
+        const imageUrl = path.join(__dirname, `../../uploads/${image}`) ;
+        // console.log(imageUrl);
+        return imageUrl;
+    } catch (error) {
+        return error;
+    }
+})}
+
+// exports.getImageUrl(async (image)=>{
+//     try {
+//         const imageUrl = `${__dirname}/../${image}`;
+//         return imageUrl;
+//     } catch (error) {
+//         return error;
+//     }
+// })
