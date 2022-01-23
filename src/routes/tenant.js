@@ -6,7 +6,7 @@ const url = require('../helper/url');
 const { contactExists } = require('../helper/utils');
 const { notFound, pleaseProvide, Success } = require('../helper/messages');
 
-router.post(`${url.crud.add.replace('{{name}}', 'tenant')}`, async (req, res) => {
+router.post(`${url.add.replace('{{name}}', 'tenant')}`, async (req, res) => {
     try {
         const {
             first_name,
@@ -39,7 +39,7 @@ router.post(`${url.crud.add.replace('{{name}}', 'tenant')}`, async (req, res) =>
     }
 })
 
-router.get(`${url.crud.get.replace('{{name}}', 'tenant')}`, async (req, res) => {
+router.get(`${url.get.replace('{{name}}', 'tenant')}`, async (req, res) => {
     try {
         const newTenant = await tenant.find({"is_delete": false}).select({ "first_name": 1, "last_name": 1, "email": 1, "mobile_no": 1 });
         if (newTenant.length === 0) {
@@ -54,7 +54,7 @@ router.get(`${url.crud.get.replace('{{name}}', 'tenant')}`, async (req, res) => 
     }
 });
 
-router.put(`${url.crud.update.replace('{{name}}', 'tenant')}`, async(req,res)=>{
+router.put(`${url.update.replace('{{name}}', 'tenant')}`, async(req,res)=>{
     try {
         const {
             id,
@@ -87,7 +87,7 @@ router.put(`${url.crud.update.replace('{{name}}', 'tenant')}`, async(req,res)=>{
     }
 })
 
-router.delete(`${url.crud.delete.replace('{{name}}', 'tenant')}`, async(req,res)=>{
+router.delete(`${url.delete.replace('{{name}}', 'tenant')}`, async(req,res)=>{
     try {
         const { id } = req.query;
         if (!id) {
