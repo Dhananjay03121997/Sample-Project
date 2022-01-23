@@ -30,8 +30,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage, excelFilter : excelFilter  });
 
 const image = require('../model/image');
+const url = require('../helper/url');
 
-router.post('/image-upload',upload.single('image'), async(req,res)=>{
+router.post(`${url.add.replace('{{name}}', 'image')}`,upload.single('image'), async(req,res)=>{
     try {
         const file = req.file;
         if(!file){
@@ -50,7 +51,7 @@ router.post('/image-upload',upload.single('image'), async(req,res)=>{
     }
 });
 
-router.get('/getImages', async(req,res)=>{
+router.get(`${url.get.replace('{{name}}', 'images')}`, async(req,res)=>{
     try {
         let data = await image.find({});
         // let imagearr = [];
